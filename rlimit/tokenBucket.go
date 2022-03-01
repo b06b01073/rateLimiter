@@ -63,8 +63,10 @@ func (b *bucket) consumeToken() bool {
 }
 
 func TokenBucket(c *gin.Context) {
-	if accepted := B.consumeToken(); !accepted {
+
+	if !B.consumeToken() {
 		c.AbortWithStatus(http.StatusTooManyRequests)
 	}
+
 	c.Next()
 }

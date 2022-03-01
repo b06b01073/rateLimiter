@@ -8,9 +8,15 @@ import (
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", rlimit.TokenBucket, func(c *gin.Context) {
+	r.GET("/tokenBucket", rlimit.TokenBucket, func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "pong",
+			"message": "request accepted",
+		})
+	})
+
+	r.GET("/leakyBucket", rlimit.LeakyBucket, func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "request accepted",
 		})
 	})
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
